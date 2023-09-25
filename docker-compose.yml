@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  node18:
+    container_name: node18
+    build: ./images/node18
+    hostname: docker-node18
+    volumes:
+      - ${VOL_ETC_INPUTRC}:${DIST_ETC_INPUTRC}:cached # Autocomplete functionality to the Terminal
+      - ${VOL_ROOT_BASH_HISTORY_NODEJS}:${DIST_ROOT_BASH_HISTORY}:delegated
