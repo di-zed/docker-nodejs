@@ -2,10 +2,49 @@ version: '3'
 
 services:
 
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    hostname: docker-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_db:${DIST_MONGODB_DB}:delegated
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - internal
+
   node18:
     container_name: node18
     build: ./images/node18
+    command: node server.js
     hostname: docker-node18
+    ports:
+      - "3000:3000"
     volumes:
       - ${VOL_ETC_INPUTRC}:${DIST_ETC_INPUTRC}:cached # Autocomplete functionality to the Terminal
+      - ${VOL_PROJECTS}:${DIST_PROJECTS}:delegated
       - ${VOL_ROOT_BASH_HISTORY_NODEJS}:${DIST_ROOT_BASH_HISTORY}:delegated
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    working_dir: ${DIST_PROJECTS}
+    depends_on:
+      - mongodb
+    networks:
+      - internal
+
+volumes:
+
+  mongodb_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/${VOL_MONGODB_DB}
+      o: bind
+
+networks:
+
+  internal:
+    driver: bridge

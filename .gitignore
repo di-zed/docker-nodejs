@@ -29,5 +29,8 @@ Thumbs.db
 # Docker project
 .env
 docker-compose.local.yml
+volumes/data/db/*
+volumes/projects/*
+!volumes/projects/server.js
 volumes/root/bash_history/nodejs
 !.gitkeep

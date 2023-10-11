@@ -6,6 +6,7 @@
 
 1. **./images** The folder with custom Docker Images.
 2. **./volumes** The folder with Docker Volumes in Linux structure.
+   1. **./volumes/projects** Node.JS projects.
 
 ## Setup
 
@@ -36,10 +37,33 @@ docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d
 docker-compose stop
 ```
 
+## Project setup
+
+1. Copy the dir with the project to the *./volumes/projects/project-name* folder.
+2. Add your own configurations to the project like connection to the DB, etc.
+3. **Optional.** Add the configurations to the *docker-compose.local.yml* if you use it.
+
+But **pay special attention** to **hostname** when you create a server! With docker you can have connectivity problems if you use **localhost** or **127.0.0.1**, because it refers to the docker container and not to your local machine, therefore the container will only listen for connections from inside the container itself. It's better to use use **0.0.0.0** or directly the ip associated to the container so that we can issue requests from our local machine or from other containers.
+https://www.nodejsdesignpatterns.com/blog/node-js-development-with-docker-and-docker-compose/
+
 ## Containers
+
+### MongoDB
+
+- Host: mongodb
+- Port: 27017
+- User: {see .env file}
+- Password: {see .env file}
+
+```code
+docker-compose exec mongodb /bin/bash
+```
 
 ### Node v18
 
+- Host: node18
+- Port: 3000
+
 ```code
-docker-compose run node18 /bin/bash
+docker-compose exec node18 /bin/bash
 ```
