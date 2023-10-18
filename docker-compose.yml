@@ -4,12 +4,12 @@ services:
 
   mongodb:
     container_name: mongodb
-    image: mongo:latest
+    image: mongo:7.0.2
     hostname: docker-mongodb
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_db:${DIST_MONGODB_DB}:delegated
+      - mongodb_db:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
@@ -38,11 +38,6 @@ services:
 volumes:
 
   mongodb_db:
-    driver: local
-    driver_opts:
-      type: none
-      device: $PWD/${VOL_MONGODB_DB}
-      o: bind
 
 networks:
 
