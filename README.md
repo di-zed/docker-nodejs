@@ -46,6 +46,18 @@ docker-compose stop
 But **pay special attention** to **hostname** when you create a server! With docker you can have connectivity problems if you use **localhost** or **127.0.0.1**, because it refers to the docker container and not to your local machine, therefore the container will only listen for connections from inside the container itself. It's better to use use **0.0.0.0** or directly the ip associated to the container so that we can issue requests from our local machine or from other containers.
 https://www.nodejsdesignpatterns.com/blog/node-js-development-with-docker-and-docker-compose/
 
+## Debug configuration
+
+### PhpStorm / WebStorm
+
+PhpStorm: https://www.jetbrains.com/help/phpstorm/node-with-docker-compose.html
+
+WebStorm: https://www.jetbrains.com/help/webstorm/node-with-docker-compose.html
+
+The **Run/Debug Configurations** example with Nodemon:
+
+![Run/Debug Configurations Nodemon](https://raw.githubusercontent.com/di-zed/internal-storage/main/readme/images/docker-nodejs/debug_config_nodemon.png)
+
 ## Containers
 
 ### MongoDB
