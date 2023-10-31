@@ -13,7 +13,7 @@
 ## Setup
 
 1. Copy the *./.env.sample* file to the *./.env*. Check it and edit some parameters if needed.
-2. Copy the *./volumes/root/bash_history/nodejs.sample* file to the *./volumes/root/bash_history/nodejs* for saving command history in the Node containers.
+2. Copy the *./volumes/root/bash_history/node.sample* file to the *./volumes/root/bash_history/node* for saving command history in the Node containers.
 3. **Optional.** Copy the *./docker-compose.local.yml.sample* file to the *./docker-compose.local.yml* and edit it, if you need some changes in the Docker configurations locally.
 
 ## Process
