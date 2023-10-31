@@ -3,7 +3,7 @@ version: '3'
 services:
 
   mongodb:
-    container_name: mongodb
+    container_name: mongodb-node
     image: mongo:7.0.2
     hostname: docker-mongodb
     ports:
@@ -17,21 +17,35 @@ services:
       - internal
 
   node18:
-    container_name: node18
+    container_name: node18-node
     build: ./images/node18
     command: node server.js
     hostname: docker-node18
     ports:
       - "3000:3000"
     volumes:
+      - ./mounted:/home/mounted
       - ${VOL_ETC_INPUTRC}:${DIST_ETC_INPUTRC}:cached # Autocomplete functionality to the Terminal
       - ${VOL_PROJECTS}:${DIST_PROJECTS}:delegated
-      - ${VOL_ROOT_BASH_HISTORY_NODEJS}:${DIST_ROOT_BASH_HISTORY}:delegated
+      - ${VOL_ROOT_BASH_HISTORY_NODE}:${DIST_ROOT_BASH_HISTORY}:delegated
+      - ${VOL_SSH_AUTH_SOCK}:${DIST_SSH_AUTH_SOCK}:cached # Forward local machine SSH key to the Docker
+      - ~/.ssh:/root/.ssh:cached
     environment:
       NODE_ENV: ${NODE_ENV}
+      SSH_AUTH_SOCK: ${VOL_SSH_AUTH_SOCK}
     working_dir: ${DIST_PROJECTS}
     depends_on:
       - mongodb
+    networks:
+      - internal
+
+  mailcatcher:
+    container_name: mailcatcher-node
+    image: dockage/mailcatcher:latest
+    hostname: docker-mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
     networks:
       - internal
 
