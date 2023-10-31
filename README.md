@@ -1,4 +1,4 @@
-# DiZed Docker Compose for the multiple Node.JS projects
+# DiZed Docker Compose for the multiple Node.js projects
 
 ## Structure
 
@@ -6,14 +6,14 @@
 
 1. **./images** The folder with custom Docker Images.
 2. **./local** Folder for local changes. It can be convenient to use it together with the docker-compose.local.yml file.
-2. **./mounted** A folder for exchanging files between the PC and the Docker container.
-3. **./volumes** The folder with Docker Volumes in Linux structure.
+3. **./mounted** A folder for exchanging files between the PC and the Docker container.
+4. **./volumes** The folder with Docker Volumes in Linux structure.
    1. **./volumes/home/projects** Node.JS projects.
 
 ## Setup
 
 1. Copy the *./.env.sample* file to the *./.env*. Check it and edit some parameters if needed.
-2. Copy the *./volumes/root/bash_history/node.sample* file to the *./volumes/root/bash_history/node* for saving command history in the Node containers.
+2. Copy the *./volumes/root/bash_history/node.sample* file to the *./volumes/root/bash_history/node* for saving command history in the Node container.
 3. **Optional.** Copy the *./docker-compose.local.yml.sample* file to the *./docker-compose.local.yml* and edit it, if you need some changes in the Docker configurations locally.
 
 ## Process
@@ -42,7 +42,7 @@ docker-compose stop
 ## Project setup
 
 1. Copy the dir with the project to the *./volumes/home/projects/project-name* folder.
-2. Add your own configurations to the project like connection to the DB, etc.
+2. Add your own configurations to the project like connection to the DB, Mailcatcher, etc.
 3. **Optional.** Add the configurations to the *docker-compose.local.yml* if you use it.
 
 But **pay special attention** to **hostname** when you create a server! With docker you can have connectivity problems if you use **localhost** or **127.0.0.1**, because it refers to the docker container and not to your local machine, therefore the container will only listen for connections from inside the container itself. It's better to use use **0.0.0.0** or directly the ip associated to the container so that we can issue requests from our local machine or from other containers.

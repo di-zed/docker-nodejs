@@ -24,12 +24,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./mounted:/home/mounted
       - ${VOL_ETC_INPUTRC}:${DIST_ETC_INPUTRC}:cached # Autocomplete functionality to the Terminal
       - ${VOL_PROJECTS}:${DIST_PROJECTS}:delegated
       - ${VOL_ROOT_BASH_HISTORY_NODE}:${DIST_ROOT_BASH_HISTORY}:delegated
       - ${VOL_SSH_AUTH_SOCK}:${DIST_SSH_AUTH_SOCK}:cached # Forward local machine SSH key to the Docker
       - ~/.ssh:/root/.ssh:cached
+      - ./mounted:/home/mounted
     environment:
       NODE_ENV: ${NODE_ENV}
       SSH_AUTH_SOCK: ${VOL_SSH_AUTH_SOCK}
