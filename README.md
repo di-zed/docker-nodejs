@@ -63,7 +63,7 @@ The **Run/Debug Configurations** example with Nodemon:
 
 ## Containers
 
-### MongoDB
+### MongoDB (7.0.2)
 
 - Host: mongodb
 - Port: 27017
@@ -74,7 +74,7 @@ The **Run/Debug Configurations** example with Nodemon:
 docker-compose exec mongodb /bin/bash
 ```
 
-### Node v18
+### Node (18.18.0)
 
 - Host: node18
 - Port: 3000
@@ -83,7 +83,7 @@ docker-compose exec mongodb /bin/bash
 docker-compose exec node18 /bin/bash
 ```
 
-### MailCatcher
+### MailCatcher (0.8.2)
 
 - Host: mailcatcher
 - Port: 1025

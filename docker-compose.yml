@@ -41,7 +41,7 @@ services:
 
   mailcatcher:
     container_name: mailcatcher-node
-    image: dockage/mailcatcher:latest
+    image: dockage/mailcatcher:0.8.2
     hostname: docker-mailcatcher
     ports:
       - "1080:1080"
